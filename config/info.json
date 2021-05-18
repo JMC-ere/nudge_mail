@@ -1,0 +1,30 @@
+{
+  "STG": {
+    "INDEX_NAME": "index-nudge-result-analysis",
+    "ANALYSIS_1": "121.125.71.147",
+    "ANALYSIS_2": "121.125.71.148",
+    "ANALYSIS_3": "121.125.71.149",
+    "ID": "elastic",
+    "PWD": "wtlcnNyrDPVko01lZfIl",
+    "PORT": 9200,
+    "DB_HOST": "1.255.144.64",
+    "DB_PORT": 3306,
+    "DB_NAME": "nudge",
+    "DB_USER": "nudge_1",
+    "DB_PWD": "0000"
+  },
+  "PRD": {
+    "INDEX_NAME": "index-nudge-result-analysis",
+    "ANALYSIS_1": "121.125.71.147",
+    "ANALYSIS_2": "121.125.71.148",
+    "ANALYSIS_3": "121.125.71.149",
+    "ID": "elastic",
+    "PWD": "wtlcnNyrDPVko01lZfIl",
+    "PORT": 9200,
+    "DB_HOST": "121.125.71.189",
+    "DB_PORT": 3306,
+    "DB_NAME": "nudge_admin",
+    "DB_USER": "nudge_admin",
+    "DB_PWD": "admin!#189"
+  }
+}
