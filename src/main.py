@@ -4,7 +4,7 @@ from src.es_connect_data import es_connect, type_es, location_es
 from src.make_xl import insert_data
 
 if __name__ == '__main__':
-    with open('../../../OneDrive/바탕 화면/nudge_mail/config/info.json', 'r') as connect_info:
+    with open('../config/info.json', 'r') as connect_info:
         info = json.load(connect_info)
     info = info['STG']
 
@@ -13,7 +13,7 @@ if __name__ == '__main__':
     #               '2021-05-14', '2021-05-15', '2021-05-16', '2021-05-17', '2021-05-18', '2021-05-19', '2021-05-20',
     #               '2021-05-21', '2021-05-22', '2021-05-23', '2021-05-24', '2021-05-25']
 
-    start_days = ['2021-05-25']
+    start_days = ['2021-05-26']
 
     result_type_data = []
     result_location_data = []
