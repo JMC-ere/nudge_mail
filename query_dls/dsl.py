@@ -126,7 +126,7 @@ ES_DLS_02 = """
   "aggs": {
     "target": {
       "terms": {
-        "field": "action_body.target",
+        "field": "action_body.target1",
         "size": 1000
       },
       "aggs": {

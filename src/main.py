@@ -13,7 +13,7 @@ if __name__ == '__main__':
     #               '2021-05-14', '2021-05-15', '2021-05-16', '2021-05-17', '2021-05-18', '2021-05-19', '2021-05-20',
     #               '2021-05-21', '2021-05-22', '2021-05-23', '2021-05-24', '2021-05-25']
 
-    start_days = ['2021-05-26']
+    start_days = ['2021-05-27']
 
     result_type_data = []
     result_location_data = []
@@ -44,6 +44,7 @@ if __name__ == '__main__':
             result_type_data.append(type_e)
         # DB 데이터를 ES 데이터와 비교하여 일치할경우 데이터 추가
         for location_e in location_es_data:
+            print(location_e)
             for location_d in location_data:
                 db_location_name = list(dict(location_d).keys())[0]
                 db_location_value = list(dict(location_d).values())[0]

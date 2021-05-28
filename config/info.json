@@ -1,6 +1,6 @@
 {
   "STG": {
-    "INDEX_NAME": "index-nudge-result-analysis",
+    "INDEX_NAME": "index-nudge-result-union",
     "ANALYSIS_1": "121.125.71.147",
     "ANALYSIS_2": "121.125.71.148",
     "ANALYSIS_3": "121.125.71.149",
@@ -14,7 +14,7 @@
     "DB_PWD": "0000"
   },
   "PRD": {
-    "INDEX_NAME": "index-nudge-result-analysis",
+    "INDEX_NAME": "index-nudge-result-union",
     "ANALYSIS_1": "121.125.71.147",
     "ANALYSIS_2": "121.125.71.148",
     "ANALYSIS_3": "121.125.71.149",

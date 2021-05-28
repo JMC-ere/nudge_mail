@@ -64,12 +64,10 @@ def makeParam(target_day):
       FROM (
          SELECT
             DATE_TRUNC('day', log_time) format_dt
-             , case
-              when action_body.menu_name  is null then action_body.voice.keyword
-              else action_body.menu_name
-            end man_text
+             ,action_body.voice_name
+             man_text
             ,action_body.config config
-            ,action_body.target target
+            ,action_body.target1 target
               ,count(
                 distinct (
                   case
@@ -112,7 +110,7 @@ def makeParam(target_day):
                   else 0
                 end
               )  click_count
-          FROM "index-nudge-result-analysis"
+          FROM "index-nudge-result-union"
           WHERE
              log_time between '{target_day}T00:00:00.000+09:00' AND '{target_day}T23:59:59.999+09:00'
              and action_body.config in (
@@ -912,7 +910,7 @@ def makeParam(target_day):
 'A8385AE5-57A4-11EA-B1D9-BF69B691B61A',
 'BB56F5DA-57A5-11EA-B1D9-BF69B691B61A',
 'CC09197B-60EB-11E9-8A0F-6B0B99858FC5')
-          group by format_dt , man_text ,action_body.target ,action_body.config
+          group by format_dt , man_text ,action_body.target1 ,action_body.config
       )
       order by format_dt , man_text, target
     """

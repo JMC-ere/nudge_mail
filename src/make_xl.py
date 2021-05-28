@@ -94,6 +94,7 @@ def insert_data(location_data, type_data):
     # 종류별 데이터 입력
     for lo in location_data:
         percentage(lo)
+        print(lo)
         location_ws.append([
             lo['day'],
             lo['location_value'],
