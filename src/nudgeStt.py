@@ -962,11 +962,12 @@ def searchDBData():
                                   db=config['SCHDB_DB'], charset='utf8', read_timeout=20)
 
     cur_pymysql = con_pymysql.cursor(pymysql.cursors.DictCursor)
-    # cur_pymysql.execute("select nudge_type, nudge_name from nudge n  ")
-    # nudge_rows = cur_pymysql.fetchall()
-    # nudge_map = {}
-    # for nudge in nudge_rows:
-    #     nudge_map[nudge["nudge_type"]] = nudge["nudge_name"]
+
+    cur_pymysql.execute("select nudge_type, nudge_name from nudge n  ")
+    nudge_rows = cur_pymysql.fetchall()
+    nudge_map = {}
+    for nudge in nudge_rows:
+        nudge_map[nudge["nudge_type"]] = nudge["nudge_name"]
 
     # cur_pymysql.execute("select `type`, suggest_name from suggest ")
     # suggest_rows = cur_pymysql.fetchall()
@@ -992,7 +993,7 @@ def searchDBData():
     cur_pymysql.close()
     con_pymysql.close()
 
-    return {"EXPO": expo_map}
+    return {"EXPO": expo_map, "NUDGE": nudge_map}
 
 
 if __name__ == '__main__':
@@ -1008,10 +1009,11 @@ if __name__ == '__main__':
     if len(sys.argv) > 2:
         loop = int(sys.argv[2])
 
-    writer = pd.ExcelWriter('./src/수동넛지_통계데이터_0527.xlsx')
+    writer = pd.ExcelWriter('./src/수동넛지_통계데이터.xlsx')
 
     dbData = searchDBData()
     expo_map = dbData["EXPO"]
+    nudge_map = dbData['NUDGE']
 
     execl_rows = []
     for i in range(loop):
@@ -1021,6 +1023,7 @@ if __name__ == '__main__':
         dataList = searchEsSql(param)
 
         for data in dataList:
+            data['config'] = nudge_map[data['config']]
             if data["target"] in expo_map:
                 data["exposure_name"] = expo_map[data["target"]]
             else:
