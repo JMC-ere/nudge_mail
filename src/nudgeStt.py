@@ -1009,7 +1009,7 @@ if __name__ == '__main__':
     if len(sys.argv) > 2:
         loop = int(sys.argv[2])
 
-    writer = pd.ExcelWriter('./src/수동넛지_통계데이터.xlsx')
+    writer = pd.ExcelWriter('./src/수동넛지_통계데이터(추가전).xlsx')
 
     dbData = searchDBData()
     expo_map = dbData["EXPO"]

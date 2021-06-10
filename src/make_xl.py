@@ -113,4 +113,4 @@ def insert_data(location_data, type_data):
     sheet_styles(location_ws['A1:J' + str(num)])
 
     del wb['Sheet']
-    wb.save('자동넛지_통계데이터_0603.xlsx')
+    wb.save('자동넛지_통계데이터(추가전).xlsx')
