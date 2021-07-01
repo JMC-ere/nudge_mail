@@ -9,7 +9,7 @@ def es_connect(info):
         es_client = Elasticsearch([info['ANALYSIS_1'],
                                    info['ANALYSIS_2'],
                                    info['ANALYSIS_3']],
-                                  timeout=20,
+                                  timeout=200,
                                   port=info['PORT'],
                                   http_auth=(info['ID'], info['PWD']))
         return es_client
