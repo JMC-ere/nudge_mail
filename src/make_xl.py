@@ -6,6 +6,7 @@ THIN_BORDER = Border(left=Side(style='thin'),
                      right=Side(style='thin'),
                      top=Side(style='thin'),
                      bottom=Side(style='thin'))
+
 # 슬롯 수 제거
 type_header = ['일자', '넛지종류', '넛지 노출 수', '넛지 포커스 수', '넛지 클릭 수',
                '클릭 전환율', '노출 STB 수', '포커스 STB 수', '클릭 STB 수', '이용율']
@@ -113,4 +114,4 @@ def insert_data(location_data, type_data):
     sheet_styles(location_ws['A1:J' + str(num)])
 
     del wb['Sheet']
-    wb.save('자동넛지_통계데이터(0601~0630).xlsx')
+    wb.save('자동넛지_통계데이터(취합전).xlsx')
