@@ -28,6 +28,8 @@ def type_es(es_client, info, start_day):
         type_list_buckets = []
         list_type_data = []
 
+        result_key_count = 0
+
         if "buckets" in type_data:
             for buckets in type_data['buckets']:
                 type_list_buckets.append(buckets)
@@ -38,11 +40,13 @@ def type_es(es_client, info, start_day):
 
             for in_buckets in buckets['show']['buckets']:
                 dict_in_buckets = dict(in_buckets)
-
                 dict_type[dict_in_buckets['key']] = dict_in_buckets['doc_count']
                 dict_type[dict_in_buckets['key'] + "_stb"] = dict_in_buckets['stb']['value']
 
             list_type_data.append(dict_type)
+
+            # for i in list_type_data:
+            #     print(i)
 
         return list_type_data
 
@@ -71,7 +75,6 @@ def location_es(es_client, info, start_day):
 
             for in_buckets in buckets['show']['buckets']:
                 dict_in_buckets = dict(in_buckets)
-
                 dict_location[dict_in_buckets['key']] = dict_in_buckets['doc_count']
                 dict_location[dict_in_buckets['key'] + "_stb"] = dict_in_buckets['stb']['value']
 

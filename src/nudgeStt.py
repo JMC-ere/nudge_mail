@@ -8,10 +8,37 @@ config = {
     "SCHDB_IP": "1.255.144.64", "SCHDB_PORT": 3306, "SCHDB_USER": "nudge_1", "SCHDB_PASSWD": "0000", "SCHDB_DB": "nudge"
 }
 
-header = ["일자", "넛지종류", "노출문구", "노출위치",
-          "넛지노출수", "넛지포커스수", "넛지 클릭수", "클릭전환율", "노출 STB수", "포커스 STB수", "클릭 STB수", "이용율"]
-dataField = ["search_dt", "config", "man_text", "exposure_name", "show_count", "focus_count",
-             "click_count", "show_click_rate", "show_stb_count", "focus_stb_count", "click_stb_count",
+header = ["일자",
+          "넛지종류",
+          "노출문구",
+          "노출위치",
+          "넛지노출수",
+          "넛지포커스수",
+          "넛지 클릭수",
+          "노출 대비 포커스",
+          "포커스 대비 클릭",
+          "클릭전환율",
+          "노출 STB수",
+          "포커스 STB수",
+          "클릭 STB수",
+          "노출 대비 포커스 STB",
+          "포커스 대비 클릭 STB",
+          "이용율"]
+dataField = ["search_dt",
+             "config",
+             "man_text",
+             "exposure_name",
+             "show_count",
+             "focus_count",
+             "click_count",
+             "show_focus",
+             "focus_click",
+             "show_click_rate",
+             "show_stb_count",
+             "focus_stb_count",
+             "click_stb_count",
+             "show_stb_focus",
+             "focus_stb_click",
              "show_click_stb_rate"]
 
 
@@ -241,6 +268,45 @@ if __name__ == '__main__':
 
             execl_row = []
             for dfi in dataField:
+                # 노출 대비 포커스
+                try:
+                    show_focus = f'{((data["focus_count"] / data["show_count"]) * 100)}'
+                except ZeroDivisionError:
+                    show_focus = f'{0}'
+                # 포커스 대비 클릭
+                try:
+                    focus_click = f'{((data["click_count"] / data["focus_count"]) * 100)}'
+                except ZeroDivisionError:
+                    focus_click = f'{0}'
+                # 클릭 전환율
+                try:
+                    show_click_rate = f'{(data["click_count"] / data["show_count"]) * 100}'
+                except ZeroDivisionError:
+                    show_click_rate = f'{0}'
+
+                # 노출 대비 포커스
+                try:
+                    show_focus_stb = f'{((int(data["focus_stb_count"]) / data["show_stb_count"]) * 100)}'
+                except ZeroDivisionError:
+                    show_focus_stb = f'{0}'
+                # 포커스 대비 클릭
+                try:
+                    focus_click_stb = f'{((data["click_stb_count"] / int(data["focus_stb_count"])) * 100)}'
+                except ZeroDivisionError:
+                    focus_click_stb = f'{0}'
+                # 이용율
+                try:
+                    show_click_stb_rate = f'{(data["click_stb_count"] / data["show_stb_count"]) * 100}'
+                except ZeroDivisionError:
+                    show_click_stb_rate = f'{0}'
+
+                data["show_focus"] = '{:.1f}%'.format(float(show_focus))
+                data["focus_click"] = '{:.0f}%'.format(float(focus_click))
+                data["show_click_rate"] = '{:.2f}%'.format(float(show_click_rate))
+                data["show_stb_focus"] = '{:.1f}%'.format(float(show_focus_stb))
+                data["focus_stb_click"] = '{:.0f}%'.format(float(focus_click_stb))
+                data["show_click_stb_rate"] = '{:.2f}%'.format(float(show_click_stb_rate))
+
                 execl_row.append(data[dfi])
 
             execl_rows.append(execl_row)
@@ -248,8 +314,13 @@ if __name__ == '__main__':
         startDay = startDay + datetime.timedelta(days=1)
 
     sheetName = "Sheet1"
-    df = pd.DataFrame(execl_rows, columns=header)
-    df.to_excel(writer, sheetName, index=False)
+    try:
+        df = pd.DataFrame(list(execl_rows), columns=header)
+        df.to_excel(writer, sheetName, index=False)
+    except ValueError as err:
+        print(execl_rows)
+        print(header)
+        print(err)
 
     writer.save()
     writer.close()

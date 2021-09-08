@@ -9,7 +9,7 @@ if __name__ == '__main__':
         info = json.load(connect_info)
     info = info['STG']
 
-    start_days = ['2021-07-14']
+    start_days = ['2021-09-07']
 
     # start_days = ['2021-06-01', '2021-06-02', '2021-06-03', '2021-06-04', '2021-06-05', '2021-06-06',
     #               '2021-06-07', '2021-06-08', '2021-06-09', '2021-06-10',
@@ -47,7 +47,6 @@ if __name__ == '__main__':
             result_type_data.append(type_e)
         # DB 데이터를 ES 데이터와 비교하여 일치할경우 데이터 추가
         for location_e in location_es_data:
-            print(location_e)
             for location_d in location_data:
                 db_location_name = list(dict(location_d).keys())[0]
                 db_location_value = list(dict(location_d).values())[0]
