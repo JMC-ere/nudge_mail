@@ -1,5 +1,4 @@
 import pymysql
-from query_dls import qry
 
 
 def db_connect(info):
@@ -16,7 +15,7 @@ def db_connect(info):
 
 
 # 종류 별
-def type_db(conn):
+def type_db(conn, qry):
     try:
         type_curs = conn.cursor()
 
@@ -39,7 +38,7 @@ def type_db(conn):
 
 
 # 위치 별
-def location_db(conn):
+def location_db(conn, qry):
     try:
         location_curs = conn.cursor()
 

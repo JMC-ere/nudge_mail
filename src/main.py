@@ -1,15 +1,31 @@
+import os
+import sys
+sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 import json
 from db_connect_data import db_connect, type_db, location_db
 from es_connect_data import es_connect, type_es, location_es
 from make_xl import insert_data
-
+from datetime import datetime, timedelta
+from query_dls import qry, dsl
 
 if __name__ == '__main__':
-    with open('../config/info.json', 'r') as connect_info:
-        info = json.load(connect_info)
-    info = info['STG']
 
-    start_days = ['2021-09-07']
+    print(sys.path)
+
+    start_days = []
+    start = sys.argv[1]
+    loop = int(sys.argv[2])
+
+    for i in range(0, loop):
+        day = datetime.strptime(start, '%Y-%m-%d') + timedelta(days=i)
+        day = day.strftime('%Y-%m-%d')
+        start_days.append(day)
+
+    print(start_days)
+
+    with open('config/info.json', 'r') as connect_info:
+        info = json.load(connect_info)
+    info = info['PRD']
 
     # start_days = ['2021-06-01', '2021-06-02', '2021-06-03', '2021-06-04', '2021-06-05', '2021-06-06',
     #               '2021-06-07', '2021-06-08', '2021-06-09', '2021-06-10',
@@ -24,17 +40,17 @@ if __name__ == '__main__':
     # DB Connection
     db_info = db_connect(info)
     # 종류별 DB 데이터
-    type_data = type_db(db_info)
+    type_data = type_db(db_info, qry)
     # 위치별 DB 데이터
-    location_data = location_db(db_info)
+    location_data = location_db(db_info, qry)
 
     # ES Connection
     es_client = es_connect(info)
     for start_day in start_days:
         # 종류별 ES 데이터
-        type_es_data = type_es(es_client, info, start_day)
+        type_es_data = type_es(es_client, info, start_day, dsl=dsl)
         # 위치별 ES 데이터
-        location_es_data = location_es(es_client, info, start_day)
+        location_es_data = location_es(es_client, info, start_day, dsl=dsl)
 
         # DB 데이터를 ES 데이터와 비교하여 일치할경우 데이터 추가
         for type_e in type_es_data:

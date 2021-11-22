@@ -1,5 +1,4 @@
 from elasticsearch import Elasticsearch
-from query_dls import dsl
 import traceback
 
 
@@ -21,7 +20,7 @@ def es_connect(info):
 
 
 # 종류 별
-def type_es(es_client, info, start_day):
+def type_es(es_client, info, start_day, dsl):
     try:
         type_es_data = es_client.search(index=info['INDEX_NAME'], body=dsl.ES_DLS_01 % (start_day, start_day))
         type_data = type_es_data['aggregations']['config']
@@ -57,7 +56,7 @@ def type_es(es_client, info, start_day):
 
 
 # 위치 별
-def location_es(es_client, info, start_day):
+def location_es(es_client, info, start_day, dsl):
     try:
         location_es_data = es_client.search(index=info['INDEX_NAME'], body=dsl.ES_DLS_02 % (start_day, start_day))
 

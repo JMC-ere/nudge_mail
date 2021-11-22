@@ -195,4 +195,4 @@ def insert_data(location_data, type_data):
     sheet_styles(location_ws['A1:N' + str(num)])
 
     del wb['Sheet']
-    wb.save('자동넛지_통계데이터(취합전).xlsx')
+    wb.save('auto_nudge_data.xlsx')

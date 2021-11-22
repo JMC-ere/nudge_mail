@@ -5,7 +5,7 @@ import pandas as pd
 import sys
 
 config = {
-    "SCHDB_IP": "1.255.144.64", "SCHDB_PORT": 3306, "SCHDB_USER": "nudge_1", "SCHDB_PASSWD": "0000", "SCHDB_DB": "nudge"
+    "SCHDB_IP": "121.125.71.189", "SCHDB_PORT": 3306, "SCHDB_USER": "nudge_admin", "SCHDB_PASSWD": "admin!#189", "SCHDB_DB": "nudge_admin"
 }
 
 header = ["일자",
@@ -246,7 +246,7 @@ if __name__ == '__main__':
     if len(sys.argv) > 2:
         loop = int(sys.argv[2])
 
-    writer = pd.ExcelWriter('./src/수동넛지_통계데이터(추가전).xlsx')
+    writer = pd.ExcelWriter('./src/manual_nudge_data.xlsx')
 
     dbData = searchDBData()
     expo_map = dbData["EXPO"]
