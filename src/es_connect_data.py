@@ -5,9 +5,12 @@ import traceback
 def es_connect(info):
     try:
 
-        es_client = Elasticsearch([info['ANALYSIS_1'],
-                                   info['ANALYSIS_2'],
-                                   info['ANALYSIS_3']],
+        es_client = Elasticsearch([['121.125.71.147',
+                                    '121.125.71.148',
+                                    '121.125.71.149',
+                                    '121.125.71.157',
+                                    '121.125.71.158',
+                                    '121.125.71.159']],
                                   timeout=200,
                                   port=info['PORT'],
                                   http_auth=(info['ID'], info['PWD']))

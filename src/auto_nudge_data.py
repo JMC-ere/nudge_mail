@@ -6,7 +6,7 @@ from db_connect_data import db_connect, type_db, location_db
 from es_connect_data import es_connect, type_es, location_es
 from make_xl import insert_data
 from datetime import datetime, timedelta
-from query_dls import qry, dsl
+from query_dsl import qry, dsl
 
 if __name__ == '__main__':
 
